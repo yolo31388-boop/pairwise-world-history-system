@@ -39,9 +39,9 @@ class WorldHistorySystem:
 
     def initialize(self) -> bool:
         """初始化系统"""
-        # BUG: 没有设置_initialized标志
         self.state = State()
         self.history = []
+        self._initialized = True
         return True
 
     def tick(self, delta_time: float = 1.0) -> None:
@@ -59,6 +59,11 @@ class WorldHistorySystem:
     def get_state(self) -> Dict[str, Any]:
         """获取当前状态快照"""
         return dict(self.state.values)
+
+    @property
+    def timestamp(self) -> float:
+        """当前世界时间戳"""
+        return self.state.timestamp
 
     def get_history(self) -> List[Dict[str, Any]]:
         """获取历史记录"""
